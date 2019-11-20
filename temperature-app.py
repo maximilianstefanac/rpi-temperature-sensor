@@ -20,12 +20,13 @@ db = SQLAlchemy(app)
 def convert_temperature_to_dictionary_array(temperatures):
     temperatures_array = []
     for temperature in temperatures:
-        temperatures_array.append({'timestamp': temperature.timestamp.strftime('%Y.%m.%d, %H:%M:%S.%f'), 'temperature': temperature.temperature})
+        temperatures_array.append({'timestamp': temperature.timestamp.strftime('%Y.%m.%d, %H:%M:%S.%f'), 'temperature': temperature.temperature, 'humidity': temperature.humidity })
     return temperatures_array
 
 class Temperature(db.Model):
         timestamp = db.Column(db.DateTime, primary_key=True)
         temperature = db.Column(db.Float, nullable=False)
+        humidity = db.Column(db.Float, nullable=False)
 
 
 class Temperatures(Resource):
