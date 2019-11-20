@@ -20,8 +20,9 @@ class Temperature(db.Model):
 
 def read_temperature():
         humidity, temperature = Adafruit_DHT.read_retry(Adafruit_DHT.DHT11, 4)
+        return temperature
 
-temperature = Temperature(timestamp = datetime.now(), temperature= 12.0)
+temperature = Temperature(timestamp = datetime.now(), temperature=read_temperature())
 
 db.session.add(temperature)
 db.session.commit()
