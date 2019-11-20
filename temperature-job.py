@@ -22,6 +22,9 @@ def read_temperature():
         humidity, temperature = Adafruit_DHT.read_retry(Adafruit_DHT.DHT11, 4)
         return temperature
 
+if not os.path.exists(os.path.join(project_dir, "temperatures.db")):
+        db.create_all()
+
 temperature = Temperature(timestamp = datetime.now(), temperature=read_temperature())
 
 db.session.add(temperature)
